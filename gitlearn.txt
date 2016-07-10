@@ -34,8 +34,64 @@
 //会提示CONFLICT，修改提示的各个分支中的部分，再提交    当Git无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
 26.$ git log --graph --pretty=oneline --abbrev-commit //查看冲突合并情况 删除一个分支即可
 //分支策略
+27. git merge --no-ff -m "merge with no-ff" dev //合并dev分支到当前分支，禁用fast forwad
+28.  git log --graphy --pretty=oneline --abbrev-commit //查看分支合并日志
+//在实际开发中，我们应该按照几个基本原则进行分支管理：
+//首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；
+//那在哪干活呢？干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；
+//你和你的小伙伴们每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并就可以了。
+//bug解决
+29 git stash  //储存当前分支工作现场
+$ git checkout master //切换到修改bug的分支
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 6 commits.
+$ git checkout -b issue-101  //创建bug分支，进行修改
+Switched to a new branch 'issue-101'
+//修改bug，提交 
+$ git add readme.txt 
+$ git commit -m "fix bug 101"
+[issue-101 cc17032] fix bug 101
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+//切换回分支mastrer 合并到master，删除bug分支 提交
+ $ git checkout master
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 2 commits.
+$ git merge --no-ff -m "merged bug fix 101" issue-101
+Merge made by the 'recursive' strategy.
+ readme.txt |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+$ git branch -d issue-101
+Deleted branch issue-101 (was cc17032).
+//切换回原来工作的分支
+$ git checkout dev
+Switched to branch 'dev'
+$ git status
+# On branch dev
+nothing to commit (working directory clean)
 
-
-
+//工作区是干净的，刚才的工作现场存到哪去了？用git stash list命令看看：
+$ git stash list
+stash@{0}: WIP on dev: 6224937 add merge
+//工作现场还在，Git把stash内容存在某个地方了，但是需要恢复一下，有两个办法：
+//一是用git stash apply恢复，但是恢复后，stash内容并不删除，你需要用git stash drop来删除；
+//另一种方式是用git stash pop，恢复的同时把stash内容也删了：
+$ git stash pop
+# On branch dev
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#       new file:   hello.py
+#
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#       modified:   readme.txt
+#
+Dropped refs/stash@{0} (f624f8e5f082f2df2bed8a4e09c12fd2943bdd40)
+//再用git stash list查看，就看不到任何stash内容了：
+$ git stash list
+//你可以多次stash，恢复的时候，先用git stash list查看，然后恢复指定的stash，用命令：
+$ git stash apply stash@{0}
 
 
