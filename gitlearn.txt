@@ -33,7 +33,7 @@
 //解决冲突 多个分支提交同一个文件修改，合并时发生冲突，不能快速合并
 //会提示CONFLICT，修改提示的各个分支中的部分，再提交    当Git无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
 26.$ git log --graph --pretty=oneline --abbrev-commit //查看冲突合并情况 删除一个分支即可
-//分支策略
+//分支策略1
 27. git merge --no-ff -m "merge with no-ff" dev //合并dev分支到当前分支，禁用fast forwad
 28.  git log --graphy --pretty=oneline --abbrev-commit //查看分支合并日志
 //在实际开发中，我们应该按照几个基本原则进行分支管理：
@@ -68,7 +68,8 @@ Switched to branch 'dev'
 $ git status
 # On branch dev
 nothing to commit (working directory clean)
-
+=======
+//分支策略1
 //工作区是干净的，刚才的工作现场存到哪去了？用git stash list命令看看：
 $ git stash list
 stash@{0}: WIP on dev: 6224937 add merge
