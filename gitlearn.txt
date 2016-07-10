@@ -1,0 +1,40 @@
+//创建版本库
+1.cd git    //定位到指定路径
+2.git init  //新建版本库
+//版本分支提交
+3.git add .  git add readme.txt //工作区存到暂存区
+4.git commit -m "提交备注"      //暂存区所有文件提交到仓库
+5.git status //查看当前仓库状态
+6.git diff readme.txt //查看文件修改内容
+7.git log //仓库修改日志
+8.git reflog //查看所有操作日志
+//版本回退
+9.git reset --hard HEAD^ //回退到上一个版本 --  git reset --hard HEAD^^ //上上个版本  -- git reset --hard HEEAD~100  //回退到上100个版本
+10.git reset --hard 版本号 //回退到指定版本
+11.git cat readme.txt //查看文件内容
+//撤销修改
+12.git checkout --readme.txt  //工作区撤销到上一步
+13.git reset HEAD readme.txt  //暂存区文件回退到工作区  如果提交到版本库了，可以回退到上个版本（如9）
+//删除文件
+14. rm readme.txt  //删除文件或直接找到文件删除  注：commit后版本库中已删除，否则可以恢复删除的文件到最新版本，但最近提交的一次修改会丢失（9）
+//远程仓库
+15. ssh-keygen -t rsa -C "your email address"  //创建SHH并保存，登录github，setting中add shh key拷贝id_rsa.pub中所有内容到key栏，添加完成
+16. git remote add origin git@github.com:github帐户名/本地仓库名.git  //github上新建版本库，把本地已有版本库与之关联
+17. git push -u origin master //本地版本库推送到远程库上，初次推送加-u 以后不用
+18. github ssh第一次推送时，会确认本地key是否添加到github信任列表中了，yes即可
+19. git clone 远程库地址  //克隆远程库到本地，有多种协议除原生ssh外还有http（速度慢，每次推送输入口令）
+//分支管理
+20. git checkout -b dev //创建并切换到改分支
+21. git branch dev //创建分支
+22. git checkout dev //切换分支
+23. git branch //查看所有分支 *为当前分支
+24. git merge dev //合并指定分支到当前分支
+25. git branch -d dev //删除分支
+//解决冲突 多个分支提交同一个文件修改，合并时发生冲突，不能快速合并
+//会提示CONFLICT，修改提示的各个分支中的部分，再提交    当Git无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
+26.$ git log --graph --pretty=oneline --abbrev-commit //查看冲突合并情况 删除一个分支即可
+
+
+
+
+
