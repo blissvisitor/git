@@ -96,3 +96,4 @@ $ git stash list
 $ git stash apply stash@{0}
 //bug branch test
 
+//master
