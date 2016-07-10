@@ -93,5 +93,5 @@ Dropped refs/stash@{0} (f624f8e5f082f2df2bed8a4e09c12fd2943bdd40)
 $ git stash list
 //你可以多次stash，恢复的时候，先用git stash list查看，然后恢复指定的stash，用命令：
 $ git stash apply stash@{0}
-
+//bug branch test
 
