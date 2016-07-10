@@ -29,7 +29,7 @@
 22. git checkout dev //切换分支
 23. git branch //查看所有分支 *为当前分支
 24. git merge dev //合并指定分支到当前分支
-25. git branch -d dev //删除分支
+25. git branch -d dev //删除分支  git branch -D feature  //强行删除分支feature
 //解决冲突 多个分支提交同一个文件修改，合并时发生冲突，不能快速合并
 //会提示CONFLICT，修改提示的各个分支中的部分，再提交    当Git无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
 26.$ git log --graph --pretty=oneline --abbrev-commit //查看冲突合并情况 删除一个分支即可
@@ -94,5 +94,5 @@ Dropped refs/stash@{0} (f624f8e5f082f2df2bed8a4e09c12fd2943bdd40)
 $ git stash list
 //你可以多次stash，恢复的时候，先用git stash list查看，然后恢复指定的stash，用命令：
 $ git stash apply stash@{0}
-//bug branch test
+
 
